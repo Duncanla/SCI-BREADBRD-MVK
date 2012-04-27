@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# This is a temporary hack to combine ps plots that kicad
+# outputs. This will eventually turn into a script that doesn't
+# require you to manually enter names.
+
+root='SCI-BREADBRD'
+
+root1="$root-SCI Connectors"
+root11="$root1-SCI Connector"
+root12="$root1-SCI Power Connector"
+root13="$root1-SCI External Power"
+
+root2="$root-Vref Generation"
+
+root3="$root-Power Managment"
+root31="$root3-Power AVDD"
+root32="$root3-Power AVSS"
+
+# Combine ps files into a pdf (requires ghostscript)
+gs -sDEVICE=pdfwrite -dNOPAUSE -dBATCH -dSAFER \
+    -sPAPERSIZE=a4 -sOutputFile="$root.pdf" "$root.ps" \
+    "$root1.ps" \
+    "$root11.ps" "$root12.ps" "$root13.ps" "$root2.ps" \
+    "$root3.ps" "$root31.ps" "$root32.ps"
