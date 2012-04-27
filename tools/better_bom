@@ -25,19 +25,30 @@ sub usage {
     print "\tbetter_bom -f Reference -f Value -f Footprint -f Qty -f Manufacturer \\\n",
             "\t-f \"Part Number\" -f Other -o output-bom.csv input.sch\n\n";
     print "Options:\n";
-    print "\t-f\tField to be displayed. Multiple fields can be specified with\n",
-            "\t\tmultiple -f options. Each field will be a column header in the\n",
-            "\t\tBOM in the order specified. If no -f option is used, all fields\n",
-            "\t\tfound in the schematic will be given their own column. There are\n",
-            "\t\ttwo special fields that can be specified: Other and Qty. The\n",
-            "\t\t\"Other\" field will display all other fields that aren't\n",
-            "\t\tspecified with -f in a single column. The \"Qty\" field will\n",
-            "\t\tdisplay the quantity of each part (identical parts are grouped\n",
-            "\t\ttogether).\n",
-            "\n\n";
+    print "\t-f <FIELD>",
+              "\t\tField to be displayed. Multiple fields can be specified with\n",
+              "\t\tmultiple -f options. Each field will be a column header in the\n",
+              "\t\tBOM in the order specified. If no -f option is used, all fields\n",
+              "\t\tfound in the schematic will be given their own column. There are\n",
+              "\t\ttwo special fields that can be specified: Other and Qty. The\n",
+              "\t\t\"Other\" field will display all other fields that aren't\n",
+              "\t\tspecified with -f in a single column. The \"Qty\" field will\n",
+              "\t\tdisplay the quantity of each part (identical parts are grouped\n",
+              "\t\ttogether).\n",
+              "\n\n";
+
+    print "\t-e <FIELD>",
+              "\tField to be excluded. Multiple fields can be specified with \n",
+              "\t\tmultiple -e options. This option will override any -f options.\n",
+              "\t\tIt can be used to exclude options from the 'Other' field, or from\n",
+              "\t\tthe default mode where any fields that are found are added to the\n",
+              "\t\tBOM. The -e option will also remove that field when making decisions\n",
+              "\t\ton how to group matching components.\n",
+              "\n\n";
 
     print "\t-o <OUTPUTFILE>\n",
-            "\t\tSpecify an output file. Default is STDOUT\n";
+            "\t\tSpecify an output file. Default is STDOUT\n",
+            "\n\n";
 
     exit(1);
 }
