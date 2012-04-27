@@ -41,7 +41,6 @@ sub usage {
 
     exit(1);
 }
-            
 
 
 #Compare two references for sorting
@@ -78,7 +77,7 @@ usage unless @ARGV;
 
 #Parse Options
 my %opts;
-GetOptions(\%opts, "f:s@", "o:s");
+GetOptions(\%opts, "f:s@", "e:s@", "o:s");
 
 #Setup the list of fields if provided to the commnand line
 my @fieldList;
@@ -91,6 +90,14 @@ if($opts{f}){
 }
 else {
     $fields->insert("Qty");
+}
+
+#Setup the list of excluded fields if provided to the commnand line
+my $excludeFields = Set::Scalar->new;
+if($opts{e}){
+    foreach my $eopt (@{$opts{e}}) {
+        $excludeFields->insert($eopt);
+    }
 }
 
 #Setup output file. Default to STDOUT if not specified on command line
@@ -111,7 +118,6 @@ my %defaultFields = (
 );
 
 my %components;
-my %fieldHash;
 #Parse an sch file
 sub parseSch ($);
 sub parseSch ($) {
@@ -158,6 +164,7 @@ sub parseSch ($) {
             my $fieldValue;
             my $fieldName;
             my $componentKey = "";
+            my %fieldHash;
             #Read lines until end of component is reached
             while(scalar(@filelines) > 0) {
                 $current_line = shift @filelines;
@@ -190,7 +197,7 @@ sub parseSch ($) {
                     #If a field list was specified at the command line, add any unspecified fields
                     #to "Other". Otherwise, add a column for each field
                     if(@fieldList){
-                        if(not $fields->has($fieldName)) {
+                        if(not $fields->has($fieldName) and not $excludeFields->has($fieldName)) {
                             if($fieldHash{"Other"}) {
                                 $fieldHash{"Other"} = join " | ",$fieldHash{"Other"}, "$fieldName: $fieldValue";
                             }
@@ -203,10 +210,10 @@ sub parseSch ($) {
                         $fields->insert($fieldName);
                     }
 
-                    
 
                     #Add field to the component key for lookup later, ignoring reference
-                    if(($fieldName cmp "Reference") != 0) {
+                    #and any excluded fields
+                    if(($fieldName cmp "Reference") != 0 and not $excludeFields->has($fieldName)) {
                         $componentKey = join "", $componentKey, $fieldName, $fieldValue;
                     }
                 }
@@ -216,7 +223,7 @@ sub parseSch ($) {
             if($fieldHash{"Reference"} =~ /^#/) {
                 next;
             }
-            
+
             #Combine the componenent with identical components if they exist
             #Otherwise add a new entry
             if($components{$componentKey}) {
