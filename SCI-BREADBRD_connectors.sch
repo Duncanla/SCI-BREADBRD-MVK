@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 27 Apr 2012 09:11:54 AM EDT
+EESchema Schematic File Version 2  date Fri 27 Apr 2012 11:11:24 AM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -50,21 +50,26 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Sheet
-S 4200 3100 2150 1650
+S 3100 4850 2150 1650
 U 4F9A6177
 F0 "SCI Power Connector" 100
 F1 "SCI-BREADBRD_power_conn.sch" 60
 $EndSheet
 $Sheet
-S 7200 3100 2050 1600
+S 6100 4850 2050 1600
 U 4F9A6281
 F0 "SCI External Power" 100
 F1 "SCI-BREADBRD_ext_pwr.sch" 60
 $EndSheet
 $Sheet
-S 1650 3100 1800 1700
+S 4600 1850 1800 1700
 U 4F9A63AC
 F0 "SCI Connector" 100
 F1 "SCI-BREADBRD_sci_conn.sch" 60
+F2 "SCI_GPIO_0" O R 6400 2600 100
 $EndSheet
+Text HLabel 7050 2600 2    60   Output ~ 0
+SCI_GPIO_0
+Wire Wire Line
+	6400 2600 7050 2600
 $EndSCHEMATC
