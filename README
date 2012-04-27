@@ -1,0 +1,8 @@
+=============
+SCI-BREAD-MVK
+=============
+
+This is a module intended for the Texas Instruments MAVRK platform. It
+is designed to fit in to a Signal Condition Interface (SCI) slot on
+the MAVRK motherboard and provides a solderless breadboard prototyping
+area with breakouts to the SCI connectors.
