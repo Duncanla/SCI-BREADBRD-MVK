@@ -1,0 +1,8 @@
+# Backup Files #
+*~
+*.bak
+bom
+*.csv
+
+# Other files #
+ece3027_block.pdf
