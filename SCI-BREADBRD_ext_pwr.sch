@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 27 Apr 2012 11:11:24 AM EDT
+EESchema Schematic File Version 2  date Fri 27 Apr 2012 12:42:01 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -119,7 +119,7 @@ F 1 "10K" V 4900 4050 50  0000 C CNN
 F 2 "0402" H 4950 4200 60  0001 C CNN
 F 4 "Panasonic - ECG" H 4950 4200 60  0001 C CNN "Manufacturer"
 F 5 "ERJ-2GEJ103X" H 4950 4200 60  0001 C CNN "Part Number"
-F 6 "RES Thick Film 10K OHM 1/10W ±5% 0402" H 4950 4200 60  0001 C CNN "Description"
+F 6 "RES Thick Film 10K OHM 1/10W 5% 0402" H 4950 4200 60  0001 C CNN "Description"
 	1    4950 4200
 	0    -1   -1   0   
 $EndComp
@@ -132,7 +132,7 @@ F 1 "10K" V 4600 3300 50  0000 C CNN
 F 2 "0402" H 4700 3450 60  0001 C CNN
 F 4 "Panasonic - ECG" H 4700 3450 60  0001 C CNN "Manufacturer"
 F 5 "ERJ-2GEJ103X" H 4700 3450 60  0001 C CNN "Part Number"
-F 6 "RES Thick Film 10K OHM 1/10W ±5% 0402" H 4700 3450 60  0001 C CNN "Description"
+F 6 "RES Thick Film 10K OHM 1/10W 5% 0402" H 4700 3450 60  0001 C CNN "Description"
 	1    4700 3450
 	0    -1   -1   0   
 $EndComp
