@@ -1,4 +1,4 @@
-update=Wed 18 Apr 2012 06:29:11 PM EDT
+update=Fri 27 Apr 2012 09:11:52 AM EDT
 version=1
 last_client=eeschema
 [cvpcb]
@@ -40,7 +40,7 @@ LibName11=valves
 version=1
 [eeschema]
 version=1
-LibDir=/home/luke/projects/library/kicad-components
+LibDir=kicad-components
 NetFmtName=
 HPGLSpd=20
 HPGLDm=15
