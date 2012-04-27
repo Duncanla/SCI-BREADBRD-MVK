@@ -3,6 +3,7 @@
 *.bak
 bom
 *.csv
+*.net
 
 # Other files #
 ece3027_block.pdf
