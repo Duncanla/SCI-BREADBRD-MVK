@@ -1,0 +1,297 @@
+EESchema Schematic File Version 2  date Fri 27 Apr 2012 04:22:34 AM EDT
+LIBS:custom_transistors
+LIBS:TI_custom
+LIBS:JTI_custom
+LIBS:custom_power
+LIBS:custom_generic
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:special
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:SCI-BREADBRD-cache
+EELAYER 25  0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 4 9
+Title "SCI-BREADBRD-MVK"
+Date "27 apr 2012"
+Rev "A"
+Comp "The Ohio State University"
+Comment1 "Luke Duncan"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L SI4564DY-T1-GE3 Q?
+U 1 1 4F9A6317
+P 6300 3550
+F 0 "Q?" H 6588 4138 40  0000 C CNN
+F 1 "SI4564DY-T1-GE3" H 6313 2913 40  0000 C CNN
+F 2 "SOP_8_VISHAY" H 6300 3550 60  0001 C CNN
+F 4 "Vishay" H 6300 3550 60  0001 C CNN "Manufacturer"
+F 5 "SI4564DY-T1-GE3" H 6300 3550 60  0001 C CNN "Part Number"
+F 6 "MOSFET N/P-CH 40V 10A/9.2A 8SOIC" H 6300 3550 60  0001 C CNN "Description"
+	1    6300 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_3 P?
+U 1 1 4F9A6320
+P 7350 3550
+F 0 "P?" H 7350 3750 50  0000 C CNN
+F 1 "CONN_3" H 7350 3350 40  0000 C CNN
+F 2 "PIN_ARRAY_1x3_TERMBLOCK" H 7350 3550 60  0001 C CNN
+F 4 "Buchanon" H 7350 3550 60  0001 C CNN "Manufacturer"
+F 5 "282834-3" H 7350 3550 60  0001 C CNN "Part Number"
+F 6 "TERMINAL BLOCK 3POS 0.1in" H 7350 3550 60  0001 C CNN "Description"
+	1    7350 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L JUMPER_3 JP?
+U 1 1 4F9A6329
+P 5350 2350
+F 0 "JP?" H 5250 2450 60  0000 C CNN
+F 1 "JUMPER_3" H 5250 1850 40  0000 C CNN
+F 2 "PIN_ARRAY_1x3" H 5350 2350 60  0001 C CNN
+F 4 "3M" H 5350 2350 60  0001 C CNN "Manufacturer"
+F 5 "961103-6404-AR" H 5350 2350 60  0001 C CNN "Part Number"
+F 6 "HEADER 3POS 0.1in" H 5350 2350 60  0001 C CNN "Description"
+	1    5350 2350
+	-1   0    0    -1  
+$EndComp
+$Comp
+L JUMPER_3 JP?
+U 1 1 4F9A6332
+P 5350 4750
+F 0 "JP?" H 5250 4850 60  0000 C CNN
+F 1 "JUMPER_3" H 5250 4250 40  0000 C CNN
+F 2 "PIN_ARRAY_1x3" H 5350 4750 60  0001 C CNN
+F 4 "3M" H 5350 4750 60  0001 C CNN "Manufacturer"
+F 5 "961103-6404-AR" H 5350 4750 60  0001 C CNN "Part Number"
+F 6 "HEADER 3POS 0.1in" H 5350 4750 60  0001 C CNN "Description"
+	1    5350 4750
+	-1   0    0    1   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 4F9A6338
+P 6850 3600
+F 0 "#PWR?" H 6850 3600 30  0001 C CNN
+F 1 "GND" H 6850 3530 30  0001 C CNN
+	1    6850 3600
+	-1   0    0    -1  
+$EndComp
+$Comp
+L R_US R?
+U 1 1 4F9A6341
+P 4950 4200
+F 0 "R?" V 5000 4100 50  0000 C CNN
+F 1 "10K" V 4900 4050 50  0000 C CNN
+F 2 "SM0402" H 4950 4200 60  0001 C CNN
+F 4 "Panasonic - ECG" H 4950 4200 60  0001 C CNN "Manufacturer"
+F 5 "ERJ-2GEJ103X" H 4950 4200 60  0001 C CNN "Part Number"
+F 6 "RES Thick Film 10K OHM 1/10W ±5% 0402" H 4950 4200 60  0001 C CNN "Description"
+	1    4950 4200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_US R?
+U 1 1 4F9A634A
+P 4700 3450
+F 0 "R?" V 4700 3350 50  0000 C CNN
+F 1 "10K" V 4600 3300 50  0000 C CNN
+F 2 "SM0402" H 4700 3450 60  0001 C CNN
+F 4 "Panasonic - ECG" H 4700 3450 60  0001 C CNN "Manufacturer"
+F 5 "ERJ-2GEJ103X" H 4700 3450 60  0001 C CNN "Part Number"
+F 6 "RES Thick Film 10K OHM 1/10W ±5% 0402" H 4700 3450 60  0001 C CNN "Description"
+	1    4700 3450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L DIODESCH D?
+U 1 1 4F9A6353
+P 5500 3100
+F 0 "D?" H 5500 3200 40  0000 C CNN
+F 1 "DIODESCH" H 5500 3000 40  0000 C CNN
+F 2 "SOT_23_ON" H 5500 3100 60  0001 C CNN
+F 4 "ON Semiconductor" H 5500 3100 60  0001 C CNN "Manufacturer"
+F 5 "BZX84C12LT1G" H 5500 3100 60  0001 C CNN "Part Number"
+F 6 "DIODE ZENER 12V 225MW SOT-23" H 5500 3100 60  0001 C CNN "Description"
+	1    5500 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L DIODESCH D?
+U 1 1 4F9A635C
+P 5500 3850
+F 0 "D?" H 5500 3950 40  0000 C CNN
+F 1 "DIODESCH" H 5500 3750 40  0000 C CNN
+F 2 "SOT_23_ON" H 5500 3850 60  0001 C CNN
+F 4 "ON Semiconductor" H 5500 3850 60  0001 C CNN "Manufacturer"
+F 5 "BZX84C12LT1G" H 5500 3850 60  0001 C CNN "Part Number"
+F 6 "DIODE ZENER 12V 225MW SOT-23" H 5500 3850 60  0001 C CNN "Description"
+	1    5500 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 4F9A6362
+P 4700 3800
+F 0 "#PWR?" H 4700 3800 30  0001 C CNN
+F 1 "GND" H 4700 3730 30  0001 C CNN
+	1    4700 3800
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 4F9A6368
+P 4950 4550
+F 0 "#PWR?" H 4950 4550 30  0001 C CNN
+F 1 "GND" H 4950 4480 30  0001 C CNN
+	1    4950 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L AFE/SCI_ANLG_VDD #PWR?
+U 1 1 4F9A636E
+P 5750 2250
+F 0 "#PWR?" H 5750 2350 30  0001 C CNN
+F 1 "AFE/SCI_ANLG_VDD" H 5750 2350 30  0000 C CNN
+	1    5750 2250
+	1    0    0    -1  
+$EndComp
+$Comp
+L AFE/SCI_ANLG_VSS #PWR?
+U 1 1 4F9A6374
+P 5750 4850
+F 0 "#PWR?" H 5750 4750 30  0001 C CNN
+F 1 "AFE/SCI_ANLG_VSS" H 5750 4750 30  0000 C CNN
+	1    5750 4850
+	1    0    0    -1  
+$EndComp
+$Comp
+L MOD_VSS #PWR?
+U 1 1 4F9A637A
+P 5950 4600
+F 0 "#PWR?" H 5950 4500 30  0001 C CNN
+F 1 "MOD_VSS" H 5950 4500 30  0000 C CNN
+	1    5950 4600
+	1    0    0    -1  
+$EndComp
+$Comp
+L MOD_VDD #PWR?
+U 1 1 4F9A6380
+P 5950 2500
+F 0 "#PWR?" H 5950 2600 30  0001 C CNN
+F 1 "MOD_VDD" H 5950 2600 30  0000 C CNN
+	1    5950 2500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6750 3400 6950 3400
+Wire Wire Line
+	6800 3400 6800 3450
+Wire Wire Line
+	6800 3450 6750 3450
+Wire Wire Line
+	6950 3400 6950 3450
+Wire Wire Line
+	6950 3450 7000 3450
+Connection ~ 6800 3400
+Wire Wire Line
+	6750 3700 6800 3700
+Wire Wire Line
+	6800 3700 6800 3750
+Wire Wire Line
+	6750 3750 6950 3750
+Wire Wire Line
+	6950 3750 6950 3650
+Wire Wire Line
+	6950 3650 7000 3650
+Connection ~ 6800 3750
+Wire Wire Line
+	6850 3600 6850 3550
+Wire Wire Line
+	6850 3550 7000 3550
+Wire Wire Line
+	5700 3100 5900 3100
+Wire Wire Line
+	5800 3100 5800 2750
+Wire Wire Line
+	5800 2750 5650 2750
+Connection ~ 5800 3100
+Wire Wire Line
+	4700 3100 5300 3100
+Wire Wire Line
+	4700 3800 4700 3700
+Wire Wire Line
+	5200 3100 5200 3300
+Wire Wire Line
+	5200 3300 5900 3300
+Connection ~ 5200 3100
+Wire Wire Line
+	5700 3850 5900 3850
+Wire Wire Line
+	5200 4050 5900 4050
+Wire Wire Line
+	5200 4050 5200 3850
+Connection ~ 5200 3850
+Wire Wire Line
+	4950 4550 4950 4450
+Wire Wire Line
+	5650 4350 5800 4350
+Wire Wire Line
+	5800 4350 5800 4050
+Connection ~ 5800 4050
+Wire Wire Line
+	5650 2350 5750 2350
+Wire Wire Line
+	5750 2350 5750 2250
+Wire Wire Line
+	5750 4850 5750 4750
+Wire Wire Line
+	5750 4750 5650 4750
+Wire Wire Line
+	4700 3200 4700 3100
+Wire Wire Line
+	4950 3950 4950 3850
+Wire Wire Line
+	4950 3850 5300 3850
+Wire Wire Line
+	5950 4600 5950 4550
+Wire Wire Line
+	5950 4550 5650 4550
+Wire Wire Line
+	5650 2550 5950 2550
+Wire Wire Line
+	5950 2550 5950 2500
+$EndSCHEMATC

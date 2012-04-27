@@ -1,0 +1,183 @@
+#
+# Makefile.kicad - Makefile template for KiCAD projects
+#
+# Written 2011 by Werner Almesberger
+# Copyright 2011 Werner Almesberger
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+
+#
+# This Makefile has been setup for producing boards at BatchPCB
+# (batchpcb.com) or for home production using toner transfer
+#
+
+#
+# Define before including this template:
+#
+# NAME		project name
+# VERSION	"release" version number
+#
+EDA_TOOLS=~/qi-hardware/eda-tools
+
+PLOT_BRD = pcbnew --plot=ps_a4 --ps-pads-drill-opt=none --fill-all-zones
+CPTX = $(EDA_TOOLS)/mlztx/cptx
+GMERGE = $(EDA_TOOLS)/fab/gmerge
+DRL2GERBER = $(EDA_TOOLS)/fab/drl2gerber
+PRETTYGERBV = $(EDA_TOOLS)/fab/prettygerbv
+POS2FAB = $(EDA_TOOLS)/fab/pos2fab
+FPDOC = PATH=$$PATH:$(EDA_TOOLS)/fab:$(EDA_TOOLS)/fpd2pdf fpdoc
+
+DIR = $(shell pwd | sed 's|.*/||')
+
+SCH=$(shell pwd)/$(NAME).sch
+BRD=$(shell pwd)/$(NAME).brd
+
+#Define space and comma so that they can be used in subst
+SPACE=$(empty) $(empty)
+COMMA=,
+
+
+.PHONY:		all gen generate sch brd xpdf front back clean
+.PHONY:		gerber gerbv fab fab-pcb overview bom fullbom dkbom
+
+all:
+		@echo "make what ? target: gen sch brd xpdf front back clean"
+		@exit 1
+
+gen generate:
+		eeschema --plot=ps $(SCH)
+		# need scripts
+
+sch:
+		eeschema $(SCH)
+
+brd:
+		pcbnew $(BRD)
+
+xpdf:
+		xpdf $(NAME).pdf
+
+front:		fab/$(NAME)-Front.ps
+
+back:		fab/$(NAME)-Back.ps
+
+# --- DIY production (toner transfer) -----------------------------------------
+
+#
+# Postscript for production of front/back layer, using the toner transfer
+# method. Note that other artwork transfer methods may require different
+# mirror settings.
+#
+# We use  --ps-pads-drill-opt=none  to avoid having any hole before drilling,
+# which yields the best results with a CNC drill. For manual drilling, "real"
+# would be preferrable. Do not use "small", for this created holes that are
+# larger (!) than designed.
+#
+
+fab/%-Front.ps:	%.brd
+		$(PLOT_BRD) -l Front --mirror $<
+
+fab/%-Back.ps:	%.brd
+		$(PLOT_BRD) -l Back $<
+
+# --- Industrial production ---------------------------------------------------
+GERBDIR = gerbers
+GERBERS = SilkS_Front.gto Mask_Front.gts \
+	  Front.gtl Back.gbl Mask_Back.gbs \
+	  PCB_Edges.oln SoldP_Front.gtp
+
+PCB_FILES = $(GERBDIR)/$(NAME).drl $(GERBERS:%=$(GERBDIR)/$(NAME)-%)
+
+gerber:		$(GERBERS:%=$(GERBDIR)/$(NAME)-%)
+
+$(GERBERS:%=$(GERBDIR)/$(NAME)-%): $(NAME).brd Makefile
+		mkdir -p $(GERBDIR)
+		pcbnew --plot=gerber --origin=aux \
+		  -l $(subst $(SPACE),$(COMMA),$(basename $(GERBERS))) \
+		  --fill-all-zones --exclude-pcb-edge \
+		  $(BRD)
+		mv $(NAME)-PCB_Edges.gbr $(NAME)-PCB_Edges.oln
+		cp $(GERBERS:%=$(NAME)-%) $(GERBDIR)
+		rm $(GERBERS:%=$(NAME)-%)
+
+fab:		fab-pcb
+
+$(GERBDIR)/$(NAME).drl:	$(NAME).brd
+		pcbnew --drill --origin=aux $(BRD)
+		mv $(NAME).drl $(GERBDIR)/$(NAME).drl
+
+fab-pcb:	$(PCB_FILES)
+		mkdir -p fab
+		tar Ccfz .. fab/$(NAME)-pcb-$(VERSION).tar.gz \
+		  $(PCB_FILES:%=$(DIR)/%)
+		cd ..; zip -l $(DIR)/fab/$(NAME)-pcb-$(VERSION).zip \
+		  $(PCB_FILES:%=$(DIR)/%)
+
+gerbv:
+		gerbv $(GERBERS:%=$(GERBDIR)/%)
+
+# --- BOM Generation ----------------------------------------------------------
+BOM_TOOL=tools/better_bom
+BOM_DIR = bom
+BOM_FIELDS=-f Reference -f Value -f Footprint -f Qty \
+	   -f Manufacturer -f "Part Number" -f Description \
+	   -f Note -f Other
+
+DK_BOM_FIELDS=-f "Digi-Key Part Number" -f Manufacturer \
+	      -f "Part Number" -f "Customer Reference" -f Qty 
+
+bom: fullbom dkbom
+
+fullbom: $(BOM_DIR)/$(NAME)-bom.csv
+
+$(BOM_DIR)/$(NAME)-bom.csv: $(NAME).sch
+	mkdir -p bom
+	$(BOM_TOOL) $(BOM_FIELDS) -o $@ $(NAME).sch
+
+dkbom:	$(BOM_DIR)/$(NAME)-dkbom.csv
+
+$(BOM_DIR)/$(NAME)-dkbom.csv: $(NAME).sch
+	mkdir -p bom
+	$(BOM_TOOL) $(DK_BOM_FIELDS) -o $@ $(NAME).sch
+
+# --- Overview images ---------------------------------------------------------
+
+%-Drill.gbr:	%.drl
+		$(DRL2GERBER) $^ >$@ || { rm -f "$@"; exit 1; }
+
+$(NAME)-front.png: gerber $(GERBDIR)/$(NAME).drl
+		cd $(GERBDIR) && $(PRETTYGERBV) -d $(GERBDIR)/$(NAME).drl $(NAME) front \
+		  $(NAME)-front.png
+
+$(NAME)-back.png: gerber $(GERBDIR)/$(NAME).drl
+		cd $(GERBDIR) && $(PRETTYGERBV) -d $(GERBDIR)/$(NAME).drl $(NAME) back \
+		  $(NAME)-back.png
+
+$(NAME)-overview.png: gerber $(GERBDIR)/$(NAME).drl
+		cd $(GERBDIR) && $(PRETTYGERBV) -d $(GERBDIR)/m$(NAME).drl $(NAME) all \
+		  $(NAME)-overview.png
+
+overview:	$(NAME)-overview.png
+		display $(GERBDIR)/$(NAME)-overview.png
+
+# --- Cleanup -----------------------------------------------------------------
+
+clean::
+		rm -f $(GERBERS:%=$(GERBDIR)/$(NAME)-%)
+		rm -f $(GERBDIR)/$(NAME).drl
+		rm -f $(GERBDIR)/$(NAME)-overview.png $(GERBDIR)/$(NAME)-front.png
+		rm -f $(GERBDIR)/$(NAME)-back.png
+		rm -f $(NAME)Front.pos $(NAME)-pos.csv
+		rm -f $(BOM_DIR)/$(NAME)-bom.csv $(NAME)-footprints.pdf
+		rm -f $(BOM_DIR)/$(NAME)-dkbom.csv
+
+spotless::	clean
+		rm -f '$$'savepcb.000 '$$'savepcb.brd
+		rm -f $(NAME).000
+		rm -f $(NAME).net
+		rm -f $(NAME)*.bak
+		rm -f *~

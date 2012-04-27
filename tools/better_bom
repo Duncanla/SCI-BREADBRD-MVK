@@ -1,0 +1,264 @@
+#!/usr/bin/perl
+
+use warnings;
+use strict;
+use File::Basename;
+use Set::Scalar;
+use Getopt::Long;
+
+#Print usage information
+sub usage {
+    print "USAGE: $0 [-f <FIELD1> ...] [-o <OUTPUTFILE>] <INPUTFILE>\n\n";
+    print "Example:\n";
+    print "\tbetter_bom -f Reference -f Value -f Footprint -f Qty -f Manufacturer \\\n",
+            "\t-f \"Part Number\" -f Other -o output-bom.csv input.sch\n\n";
+    print "Options:\n";
+    print "\t-f\tField to be displayed. Multiple fields can be specified with\n",
+            "\t\tmultiple -f options. Each field will be a column header in the\n",
+            "\t\tBOM in the order specified. If no -f option is used, all fields\n",
+            "\t\tfound in the schematic will be given their own column. There are\n",
+            "\t\ttwo special fields that can be specified: Other and Qty. The\n",
+            "\t\t\"Other\" field will display all other fields that aren't\n",
+            "\t\tspecified with -f in a single column. The \"Qty\" field will\n",
+            "\t\tdisplay the quantity of each part (identical parts are grouped\n",
+            "\t\ttogether).\n",
+            "\n\n";
+
+    print "\t-o <OUTPUTFILE>\n",
+            "\t\tSpecify an output file. Default is STDOUT\n";
+
+    exit(1);
+}
+            
+
+
+#Compare two references for sorting
+sub cmpRef ($$) {
+    my ($a, $b) = (shift, shift);
+    $a =~ /(\D+)([\d?]+)$/;
+    my $aLetter = $1;
+    my $aNum = $2;
+    $b =~ /(\D+)([\d?]+)$/;
+
+    if(($aLetter cmp $1) == 0){
+        if( ($aNum cmp "?") != 0 and ($2 cmp "?") != 0){
+            $aNum <=> $2;
+        }
+        else {
+            return 0;
+        }
+    }
+    else {
+        $aLetter cmp $1;
+    }
+}
+
+#Compare two components (entries into the BOM) by Reference for sorting
+sub cmpComponentRef ($$) {
+    my ($a, $b) = (shift, shift);
+    $a->{"Reference"} =~ /^([\w?]+)/;
+    my $aRef = $1;
+    $b->{"Reference"} =~/^([\w?]+)/;
+    cmpRef($aRef, $1);
+}
+
+usage unless @ARGV;
+
+#Parse Options
+my %opts;
+GetOptions(\%opts, "f:s@", "o:s");
+
+#Setup the list of fields if provided to the commnand line
+my @fieldList;
+my $fields = Set::Scalar->new;
+if($opts{f}){
+    foreach my $fopt (@{$opts{f}}) {
+        push @fieldList, $fopt;
+        $fields->insert($fopt);
+    }
+}
+else {
+    $fields->insert("Qty");
+}
+
+#Setup output file. Default to STDOUT if not specified on command line
+if($opts{o}){
+    my $outPath = $opts{o};
+    open OUT, ">$outPath" or die $!
+}
+else {
+    *OUT = *STDOUT;
+}
+
+#Generate lookup table for default kicad fields
+my %defaultFields = (
+    0 => "Reference",
+    1 => "Value",
+    2 => "Footprint",
+    3 => "Datasheet"
+);
+
+my %components;
+my %fieldHash;
+#Parse an sch file
+sub parseSch ($);
+sub parseSch ($) {
+    my ($path) = (shift);
+    open IN, "$path" or die $!;
+    my @filelines = <IN>;
+
+    #Save the directory in case other hierarchical cheets are found
+    my($filename, $dirname) = fileparse($path);
+
+    while(scalar(@filelines) > 0) {
+        my $current_line = shift @filelines;
+        #If this is a reference to a hierarchical sheet, recursively parse it
+        if($current_line =~ /^\$Sheet/){
+            my $fieldNum;
+            my $fieldString;
+
+            #Read lines until the end of the sheet is reached
+            while(scalar(@filelines) > 0) {
+                $current_line = shift @filelines;
+                if($current_line =~ /^\$EndSheet/){
+                    last;
+                }
+                #Parse Field lines from the schematic
+                elsif($current_line =~ /^F\s*\d/){
+                    if($current_line =~ /^F\s*(\d)\s+"(.+)"\s+.*/){
+                        $fieldNum = $1;
+                        $fieldString=$2;
+                    }
+                    else{
+                        print "WARNING: Unable to correctly parse field line: $_\n";
+                    }
+
+                    #Parse the file name of the hierarchical schem.
+                    if($fieldNum == 1){
+                        parseSch("$dirname$fieldString")
+                    }
+                }
+            }
+        }
+        #If this is the beginning of a component, parse it. Otherwise ignore
+        elsif($current_line =~ /^\$Comp/){
+            my $fieldNum;
+            my $fieldValue;
+            my $fieldName;
+            my $componentKey = "";
+            #Read lines until end of component is reached
+            while(scalar(@filelines) > 0) {
+                $current_line = shift @filelines;
+                if($current_line =~ /^\$EndComp/){
+                    last;
+                }
+                #Parse Field lines from the schematic
+                elsif($current_line =~ /^F\s+/){
+                    if($current_line =~ /^F\s+(\d)\s+"(.+)"\s+(?:\w+\s+){7}"(.+)"/){
+                        $fieldNum = $1;
+                        $fieldValue = $2;
+                        $fieldName = $3;
+                    }
+                    elsif($current_line =~ /^F\s+(\d)\s+"(.+)"\s+(?:\w+\s+){7}/){
+                        $fieldNum = $1;
+                        $fieldValue = $2;
+                        $fieldName = "";
+                    }
+                    else{
+                        print "WARNING: Unable to correctly parse field line: $_";
+                    }
+
+                    #Add field names for default fields
+                    if($fieldNum < 4){
+                        $fieldName = $defaultFields{$fieldNum};
+                    }
+
+                    $fieldHash{$fieldName} = $fieldValue;
+
+                    #If a field list was specified at the command line, add any unspecified fields
+                    #to "Other". Otherwise, add a column for each field
+                    if(@fieldList){
+                        if(not $fields->has($fieldName)) {
+                            if($fieldHash{"Other"}) {
+                                $fieldHash{"Other"} = join " | ",$fieldHash{"Other"}, "$fieldName: $fieldValue";
+                            }
+                            else {
+                                $fieldHash{"Other"} = "$fieldName: $fieldValue";
+                            }
+                        }
+                    }
+                    else {
+                        $fields->insert($fieldName);
+                    }
+
+                    
+
+                    #Add field to the component key for lookup later, ignoring reference
+                    if(($fieldName cmp "Reference") != 0) {
+                        $componentKey = join "", $componentKey, $fieldName, $fieldValue;
+                    }
+                }
+            }
+
+            #Ignore references that start with a #
+            if($fieldHash{"Reference"} =~ /^#/) {
+                next;
+            }
+            
+            #Combine the componenent with identical components if they exist
+            #Otherwise add a new entry
+            if($components{$componentKey}) {
+                $components{$componentKey}{"Qty"} += 1;
+                my @refList = (split(/\s+/, $components{$componentKey}{"Reference"}), $fieldHash{"Reference"});
+                @refList = sort cmpRef @refList;
+                $components{$componentKey}{"Reference"} = join " ", @refList;
+            }
+            else {
+                $fieldHash{"Qty"} = 1;
+                $components{$componentKey} = {%fieldHash}
+            }
+        }
+    }
+}
+
+#Process all files given from the command line
+foreach my $path (@ARGV) {
+    #Warn if file isn't a .sch file
+    if(not $path =~ /\.sch$/){
+        print "WARNING: File is not a .sch file as expected. Proceeding anyways.\n";
+    }
+
+    #Parse each file
+    parseSch($path)
+}
+
+#If no fields were specified on the command line, use all of them
+if(not @fieldList) {
+    @fieldList = ($fields->elements);
+}
+
+#Output field names as column headers
+foreach my $fieldName (@fieldList) {
+    print OUT $fieldName, ",";
+}
+print OUT "\n";
+
+#Sort the components by Reference if it is a specified field
+my @componentList = (values %components);
+if($fields->has("Reference")) {
+    @componentList = sort cmpComponentRef @componentList;
+}
+
+#Print values for each field
+foreach my $fieldHashRef (@componentList)
+{
+    foreach my $fieldName (@fieldList) {
+        if($fieldHashRef->{$fieldName}) {
+            print OUT "\"", $fieldHashRef->{$fieldName}, "\"", ",";
+        }
+        else {
+            print OUT ",";
+        }
+    }
+    print OUT "\n";
+}
