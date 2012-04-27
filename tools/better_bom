@@ -25,7 +25,7 @@ sub usage {
     print "\tbetter_bom -f Reference -f Value -f Footprint -f Qty -f Manufacturer \\\n",
             "\t-f \"Part Number\" -f Other -o output-bom.csv input.sch\n\n";
     print "Options:\n";
-    print "\t-f <FIELD>",
+    print "\t-f <FIELD>\n",
               "\t\tField to be displayed. Multiple fields can be specified with\n",
               "\t\tmultiple -f options. Each field will be a column header in the\n",
               "\t\tBOM in the order specified. If no -f option is used, all fields\n",
@@ -37,8 +37,8 @@ sub usage {
               "\t\ttogether).\n",
               "\n\n";
 
-    print "\t-e <FIELD>",
-              "\tField to be excluded. Multiple fields can be specified with \n",
+    print "\t-e <FIELD>\n",
+              "\t\tField to be excluded. Multiple fields can be specified with \n",
               "\t\tmultiple -e options. This option will override any -f options.\n",
               "\t\tIt can be used to exclude options from the 'Other' field, or from\n",
               "\t\tthe default mode where any fields that are found are added to the\n",
