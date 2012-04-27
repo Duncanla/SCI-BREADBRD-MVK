@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 27 Apr 2012 11:11:24 AM EDT
+EESchema Schematic File Version 2  date Fri 27 Apr 2012 12:40:07 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -215,7 +215,7 @@ F 1 "0.10" H 1700 3850 50  0000 C CNN
 F 2 "SM0805" H 1700 3950 60  0001 C CNN
 F 4 "Yageo" H 1700 3950 60  0001 C CNN "Manufacturer"
 F 5 "PT0805FR-7W0R1L" H 1700 3950 60  0001 C CNN "Part Number"
-F 6 "RES THICK FILM 0.10 OHM 0.25W ±1% 0805" H 1700 3950 60  0001 C CNN "Description"
+F 6 "RES THICK FILM 0.10 OHM 0.25W 1% 0805" H 1700 3950 60  0001 C CNN "Description"
 	1    1700 3950
 	1    0    0    -1  
 $EndComp
@@ -237,7 +237,7 @@ F 1 "0.10" H 1200 4150 50  0000 C CNN
 F 2 "SM0805" H 1200 4250 60  0001 C CNN
 F 4 "Yageo" H 1200 4250 60  0001 C CNN "Manufacturer"
 F 5 "PT0805FR-7W0R1L" H 1200 4250 60  0001 C CNN "Part Number"
-F 6 "RES THICK FILM 0.10 OHM 0.25W ±1% 0805" H 1200 4250 60  0001 C CNN "Description"
+F 6 "RES THICK FILM 0.10 OHM 0.25W 1% 0805" H 1200 4250 60  0001 C CNN "Description"
 	1    1200 4250
 	1    0    0    -1  
 $EndComp

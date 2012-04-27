@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 27 Apr 2012 11:11:24 AM EDT
+EESchema Schematic File Version 2  date Fri 27 Apr 2012 12:38:29 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -200,7 +200,6 @@ F 2 "0402" H 3750 1050 60  0001 C CNN
 F 4 "Panasonic - ECG" H 3750 1050 60  0001 C CNN "Manufacturer"
 F 5 "ERJ-2GEJ103X" H 3750 1050 60  0001 C CNN "Part Number"
 F 6 "RES 10K OHM 1/10W 5% 0402 SMD" H 3750 1050 60  0001 C CNN "Description"
-F 7 "DNI" H 3750 1050 60  0001 C CNN "Note"
 	1    3750 1050
 	0    -1   -1   0   
 $EndComp
