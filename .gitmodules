@@ -1,3 +1,6 @@
 [submodule "kicad-components"]
 	path = kicad-components
 	url = git://github.com/Duncanla/kicad-components.git
+[submodule "kicad-modules"]
+	path = kicad-modules
+	url = git://github.com/Duncanla/kicad-modules.git
