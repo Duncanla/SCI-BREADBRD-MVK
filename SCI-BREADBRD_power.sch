@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 27 Apr 2012 01:46:28 PM EDT
+EESchema Schematic File Version 2  date Fri 27 Apr 2012 02:46:40 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -93,27 +93,9 @@ F 1 "GND" H 1750 4180 30  0001 C CNN
 	1    1750 4250
 	1    0    0    -1  
 $EndComp
-$Comp
-L SCI_DVDD_3_3V #PWR44
-U 1 1 4F9A18A3
-P 3650 4000
-F 0 "#PWR44" H 3650 4100 30  0001 C CNN
-F 1 "SCI_DVDD_3_3V" H 3650 4100 30  0000 C CNN
-	1    3650 4000
-	1    0    0    -1  
-$EndComp
 NoConn ~ 3350 4100
 Text Label 3400 4500 0    60   ~ 0
 DUAL_SPLY_EN
-$Comp
-L SCI_DVDD_3_3V #PWR46
-U 1 1 4F9A1DFD
-P 5950 4700
-F 0 "#PWR46" H 5950 4800 30  0001 C CNN
-F 1 "SCI_DVDD_3_3V" H 5950 4800 30  0000 C CNN
-	1    5950 4700
-	1    0    0    -1  
-$EndComp
 $Comp
 L GND #PWR47
 U 1 1 4F9A1F73
@@ -203,15 +185,6 @@ F 6 "RES 10K OHM 1/10W 5% 0402 SMD" H 3750 1350 60  0001 C CNN "Description"
 	1    3750 1350
 	0    -1   -1   0   
 $EndComp
-$Comp
-L SCI_DVDD_3_3V #PWR45
-U 1 1 4F9AB960
-P 3750 1000
-F 0 "#PWR45" H 3750 1100 30  0001 C CNN
-F 1 "SCI_DVDD_3_3V" H 3750 1100 30  0000 C CNN
-	1    3750 1000
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	1900 4400 1900 4300
 Wire Wire Line
@@ -273,4 +246,31 @@ Wire Wire Line
 Wire Wire Line
 	3350 4500 5250 4500
 Connection ~ 5250 4500
+$Comp
+L SCI_DVDD_3_3V #PWR?
+U 1 1 4F9AED7C
+P 3750 1000
+F 0 "#PWR?" H 3750 1100 30  0001 C CNN
+F 1 "SCI_DVDD_3_3V" H 3750 1150 60  0000 C CNN
+	1    3750 1000
+	1    0    0    -1  
+$EndComp
+$Comp
+L SCI_DVDD_3_3V #PWR?
+U 1 1 4F9AEECF
+P 3650 4000
+F 0 "#PWR?" H 3650 4100 30  0001 C CNN
+F 1 "SCI_DVDD_3_3V" H 3650 4150 60  0000 C CNN
+	1    3650 4000
+	1    0    0    -1  
+$EndComp
+$Comp
+L SCI_DVDD_3_3V #PWR?
+U 1 1 4F9AEF3E
+P 5950 4700
+F 0 "#PWR?" H 5950 4800 30  0001 C CNN
+F 1 "SCI_DVDD_3_3V" H 5950 4850 60  0000 C CNN
+	1    5950 4700
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

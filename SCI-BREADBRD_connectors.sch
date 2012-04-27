@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 27 Apr 2012 01:15:52 PM EDT
+EESchema Schematic File Version 2  date Fri 27 Apr 2012 02:46:40 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -37,7 +37,7 @@ LIBS:valves
 LIBS:SCI-BREADBRD-cache
 EELAYER 25  0
 EELAYER END
-$Descr A 11000 8500
+$Descr A4 11693 8268
 encoding utf-8
 Sheet 2 9
 Title "SCI-BREADBRD-MVK"

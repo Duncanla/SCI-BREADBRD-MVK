@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 27 Apr 2012 01:15:52 PM EDT
+EESchema Schematic File Version 2  date Fri 27 Apr 2012 02:46:40 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
