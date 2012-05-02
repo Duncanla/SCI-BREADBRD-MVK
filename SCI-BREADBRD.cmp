@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-04-07 BZR 3493)-testing date = Fri 27 Apr 2012 08:55:24 AM EDT
+Cmp-Mod V01 Created by CvPcb (2012-04-07 BZR 3493)-testing date = Wed 02 May 2012 12:15:08 AM EDT
 
 BeginCmp
 TimeStamp = /4F8C5AD7/4F9A2F7A/4F9A30D1;
@@ -143,14 +143,14 @@ EndCmp
 BeginCmp
 TimeStamp = /4F8C584B/4F9A6281/4F9A6353;
 Reference = D1;
-ValeurCmp = DIODESCH;
+ValeurCmp = 12V;
 IdModule  = SOT_23_ON;
 EndCmp
 
 BeginCmp
 TimeStamp = /4F8C584B/4F9A6281/4F9A635C;
 Reference = D2;
-ValeurCmp = DIODESCH;
+ValeurCmp = 12V;
 IdModule  = SOT_23_ON;
 EndCmp
 
@@ -180,20 +180,6 @@ TimeStamp = /4F8C5AD7/4F9A3209/4F9A343C;
 Reference = D6;
 ValeurCmp = YEL;
 IdModule  = 0402;
-EndCmp
-
-BeginCmp
-TimeStamp = /4F8C584B/4F9A6281/4F9A6329;
-Reference = JP1;
-ValeurCmp = JUMPER_3;
-IdModule  = PIN_ARRAY_3X1;
-EndCmp
-
-BeginCmp
-TimeStamp = /4F8C584B/4F9A6281/4F9A6332;
-Reference = JP2;
-ValeurCmp = JUMPER_3;
-IdModule  = PIN_ARRAY_3X1;
 EndCmp
 
 BeginCmp
@@ -260,30 +246,30 @@ IdModule  = PIN_ARRAY_2x8;
 EndCmp
 
 BeginCmp
-TimeStamp = /4F8C5AD7/4F9A2F7A/4F9A31B3;
+TimeStamp = /4F8C5AD7/4F9A2F7A/4F9AD783;
 Reference = P8;
-ValeurCmp = AVDD;
+ValeurCmp = TP;
 IdModule  = TESTVIA_p30mil_h20mil;
 EndCmp
 
 BeginCmp
-TimeStamp = /4F8C5AD7/4F9A3209/4F9A3453;
+TimeStamp = /4F8C5AD7/4F9A3209/4F9AD953;
 Reference = P9;
-ValeurCmp = AVSS;
+ValeurCmp = TP;
 IdModule  = TESTVIA_p30mil_h20mil;
 EndCmp
 
 BeginCmp
-TimeStamp = /4F8DDD4C/4F8FA275;
+TimeStamp = /4F8DDD4C/4F9AD9B8;
 Reference = P10;
-ValeurCmp = SF_ANLG;
+ValeurCmp = TP;
 IdModule  = TESTVIA_p30mil_h20mil;
 EndCmp
 
 BeginCmp
-TimeStamp = /4F8DDD4C/4F8FA8B4;
+TimeStamp = /4F8DDD4C/4F9AD9F2;
 Reference = P11;
-ValeurCmp = SF_MOD;
+ValeurCmp = TP;
 IdModule  = TESTVIA_p30mil_h20mil;
 EndCmp
 
@@ -292,6 +278,20 @@ TimeStamp = /4F8DDD4C/4F8F7584;
 Reference = P12;
 ValeurCmp = CONN_1X2;
 IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /4F8C584B/4F9A6281/4FA07891;
+Reference = P13;
+ValeurCmp = CONN_4X2;
+IdModule  = pin_array_4x2;
+EndCmp
+
+BeginCmp
+TimeStamp = /4F8C5AD7/4FA0D66E;
+Reference = P14;
+ValeurCmp = CONN_4X2;
+IdModule  = pin_array_4x2;
 EndCmp
 
 BeginCmp
@@ -500,6 +500,20 @@ EndCmp
 BeginCmp
 TimeStamp = /4F8DDD4C/4F8F8751;
 Reference = R29;
+ValeurCmp = 10K;
+IdModule  = 0402;
+EndCmp
+
+BeginCmp
+TimeStamp = /4F8C5AD7/4F9AB46A;
+Reference = R30;
+ValeurCmp = 100K;
+IdModule  = 0402;
+EndCmp
+
+BeginCmp
+TimeStamp = /4F8C5AD7/4F9AB66E;
+Reference = R31;
 ValeurCmp = 10K;
 IdModule  = 0402;
 EndCmp
