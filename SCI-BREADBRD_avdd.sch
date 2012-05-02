@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 27 Apr 2012 02:46:40 PM EDT
+EESchema Schematic File Version 2  date Tue 01 May 2012 11:50:12 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -41,7 +41,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 7 9
 Title "SCI-BREADBRD-MVK"
-Date "27 apr 2012"
+Date "2 may 2012"
 Rev "A"
 Comp "The Ohio State University"
 Comment1 "Luke Duncan"
@@ -513,19 +513,6 @@ F 1 "PWR_FLAG" H 1450 1930 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L TP P8
-U 1 1 4F9AD783
-P 7750 4050
-F 0 "P8" H 7750 4400 40  0000 C CNN
-F 1 "TP" H 7750 4300 30  0001 C CNN
-F 2 "TESTVIA_p30mil_h20mil" H 7750 4050 60  0001 C CNN
-F 4 "TESTPOINT VIA" H 7750 4050 60  0001 C CNN "Description"
-F 5 "NO PART. TEST PAD ONLY." H 7750 4050 60  0001 C CNN "Note"
-F 6 "AVDD" H 7750 4300 60  0000 C CNN "Silkscreen"
-	1    7750 4050
-	1    0    0    -1  
-$EndComp
-$Comp
 L SCI_AVDD_5_5V #PWR?
 U 1 1 4F9AEF89
 P 1000 1150
@@ -553,14 +540,20 @@ F 1 "SCI_AVDD_5_5V" H 9900 4200 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L AFE/SCI_ANLG_VDD #PWR?
-U 1 1 4F9AEFC0
-P 7100 3800
-F 0 "#PWR?" H 7100 3900 30  0001 C CNN
-F 1 "AFE/SCI_ANLG_VDD" H 7100 3900 60  0000 C CNN
-	1    7100 3800
+L TP P8
+U 1 1 4F9AD783
+P 7750 4050
+F 0 "P8" H 7750 4400 40  0000 C CNN
+F 1 "TP" H 7750 4300 30  0001 C CNN
+F 2 "TESTVIA_p30mil_h20mil" H 7750 4050 60  0001 C CNN
+F 4 "TESTPOINT VIA" H 7750 4050 60  0001 C CNN "Description"
+F 5 "NO PART. TEST PAD ONLY." H 7750 4050 60  0001 C CNN "Note"
+F 6 "AVDD" H 7750 4300 60  0000 C CNN "Silkscreen"
+	1    7750 4050
 	1    0    0    -1  
 $EndComp
+Text HLabel 7200 3550 2    100  Output ~ 0
+AVDD
 Wire Wire Line
 	1000 1150 1000 1300
 Wire Wire Line
@@ -658,7 +651,7 @@ Wire Wire Line
 Wire Wire Line
 	5050 5950 5050 5850
 Wire Wire Line
-	7100 3800 7100 4200
+	7100 3550 7100 4200
 Wire Wire Line
 	7100 4100 7750 4100
 Wire Wire Line
@@ -728,4 +721,6 @@ Connection ~ 5700 5350
 Wire Wire Line
 	1450 1750 1450 1850
 Connection ~ 1450 1850
+Wire Wire Line
+	7100 3550 7200 3550
 $EndSCHEMATC
