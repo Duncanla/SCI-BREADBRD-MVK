@@ -4,6 +4,7 @@
 bom
 *.csv
 *.net
+*.000
 
 # Other files #
 SCI-BREADBRD*.ps
