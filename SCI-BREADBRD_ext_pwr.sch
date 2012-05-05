@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 02 May 2012 11:11:08 PM EDT
+EESchema Schematic File Version 2  date Fri 04 May 2012 05:19:19 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -41,7 +41,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 4 9
 Title "SCI-BREADBRD-MVK"
-Date "3 may 2012"
+Date "4 may 2012"
 Rev "A"
 Comp "The Ohio State University"
 Comment1 "Luke Duncan"
@@ -173,42 +173,6 @@ F 1 "PWR_FLAG" H 4400 5030 30  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L MOD_VDD #PWR012
-U 1 1 4F9AEB3C
-P 4200 2750
-F 0 "#PWR012" H 4200 2850 30  0001 C CNN
-F 1 "MOD_VDD" H 4200 2900 60  0000 C CNN
-	1    4200 2750
-	1    0    0    -1  
-$EndComp
-$Comp
-L MOD_VSS #PWR013
-U 1 1 4F9AEBAB
-P 4200 5000
-F 0 "#PWR013" H 4200 4900 30  0001 C CNN
-F 1 "MOD_VSS" H 4200 4850 60  0000 C CNN
-	1    4200 5000
-	1    0    0    -1  
-$EndComp
-$Comp
-L MOD_VDD #PWR014
-U 1 1 4FA07404
-P 6750 3500
-F 0 "#PWR014" H 6750 3600 30  0001 C CNN
-F 1 "MOD_VDD" H 6750 3650 60  0000 C CNN
-	1    6750 3500
-	1    0    0    -1  
-$EndComp
-$Comp
-L MOD_VSS #PWR015
-U 1 1 4FA07672
-P 7950 4150
-F 0 "#PWR015" H 7950 4050 30  0001 C CNN
-F 1 "MOD_VSS" H 7950 4000 60  0000 C CNN
-	1    7950 4150
-	1    0    0    -1  
-$EndComp
-$Comp
 L CONN_4X2 P13
 U 1 1 4FA07891
 P 7400 3850
@@ -314,4 +278,40 @@ Wire Wire Line
 	3350 4150 3350 4400
 Wire Wire Line
 	3350 4150 4300 4150
+$Comp
+L HI_VDD #PWR?
+U 1 1 4FA44E90
+P 4200 2750
+F 0 "#PWR?" H 4200 2850 30  0001 C CNN
+F 1 "HI_VDD" H 4200 2900 60  0000 C CNN
+	1    4200 2750
+	1    0    0    -1  
+$EndComp
+$Comp
+L HI_VSS #PWR?
+U 1 1 4FA44E9F
+P 4200 5000
+F 0 "#PWR?" H 4200 4900 30  0001 C CNN
+F 1 "HI_VSS" H 4200 4850 60  0000 C CNN
+	1    4200 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L HI_VDD #PWR?
+U 1 1 4FA44EAC
+P 6750 3500
+F 0 "#PWR?" H 6750 3600 30  0001 C CNN
+F 1 "HI_VDD" H 6750 3650 60  0000 C CNN
+	1    6750 3500
+	1    0    0    -1  
+$EndComp
+$Comp
+L HI_VSS #PWR?
+U 1 1 4FA44EBC
+P 7950 4150
+F 0 "#PWR?" H 7950 4050 30  0001 C CNN
+F 1 "HI_VSS" H 7950 4000 60  0000 C CNN
+	1    7950 4150
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

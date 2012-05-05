@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Wed 02 May 2012 11:11:08 PM EDT
+EESchema Schematic File Version 2  date Fri 04 May 2012 05:15:56 PM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -41,7 +41,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 3 9
 Title "SCI-BREADBRD-MVK"
-Date "3 may 2012"
+Date "4 may 2012"
 Rev "A"
 Comp "The Ohio State University"
 Comment1 "Luke Duncan"
