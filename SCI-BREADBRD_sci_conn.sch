@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date Fri 04 May 2012 05:15:56 PM EDT
+EESchema Schematic File Version 2  date Tue 08 May 2012 11:34:32 AM EDT
 LIBS:custom_transistors
 LIBS:TI_custom
 LIBS:JTI_custom
@@ -41,7 +41,7 @@ $Descr A4 11693 8268
 encoding utf-8
 Sheet 5 9
 Title "SCI-BREADBRD-MVK"
-Date "4 may 2012"
+Date "7 may 2012"
 Rev "A"
 Comp "The Ohio State University"
 Comment1 "Luke Duncan"
@@ -96,10 +96,10 @@ $EndComp
 $Comp
 L GND #PWR018
 U 1 1 4F9A6547
-P 5400 2200
-F 0 "#PWR018" H 5400 2200 30  0001 C CNN
-F 1 "GND" H 5400 2130 30  0001 C CNN
-	1    5400 2200
+P 6150 2200
+F 0 "#PWR018" H 6150 2200 30  0001 C CNN
+F 1 "GND" H 6150 2130 30  0001 C CNN
+	1    6150 2200
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -599,9 +599,9 @@ Wire Wire Line
 Wire Wire Line
 	5250 2900 5400 2900
 Wire Wire Line
-	5400 2150 5400 2200
+	6150 2150 6150 2200
 Wire Wire Line
-	5250 2150 5400 2150
+	5250 2150 6150 2150
 Connection ~ 2500 6350
 Wire Wire Line
 	2500 6250 2650 6250
