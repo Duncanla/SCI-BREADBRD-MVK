@@ -23,7 +23,7 @@
 #
 EDA_TOOLS=~/qi-hardware/eda-tools
 
-PLOT_BRD = pcbnew --plot=ps_a4 --ps-pads-drill-opt=none --fill-all-zones
+PLOT_BRD = pcbnew --plot=ps --plot-fill-all-zones
 CPTX = $(EDA_TOOLS)/mlztx/cptx
 GMERGE = $(EDA_TOOLS)/fab/gmerge
 DRL2GERBER = $(EDA_TOOLS)/fab/drl2gerber
@@ -79,10 +79,10 @@ back:		fab/$(NAME)-Back.ps
 #
 
 fab/%-Front.ps:	%.brd
-		$(PLOT_BRD) -l Front --mirror $<
+		$(PLOT_BRD) --layers=Front --plot-mirror $<
 
 fab/%-Back.ps:	%.brd
-		$(PLOT_BRD) -l Back $<
+		$(PLOT_BRD) --layers=Back $<
 
 # --- Industrial production ---------------------------------------------------
 GERBDIR = gerbers
@@ -96,9 +96,9 @@ gerber:		$(GERBERS:%=$(GERBDIR)/$(NAME)-%)
 
 $(GERBERS:%=$(GERBDIR)/$(NAME)-%): $(NAME).brd Makefile
 		mkdir -p $(GERBDIR)
-		pcbnew --plot=gerber --origin=aux \
-		  -l $(subst $(SPACE),$(COMMA),$(basename $(GERBERS))) \
-		  --fill-all-zones --exclude-pcb-edge \
+		pcbnew --plot=gerber --plot-aux-origin \
+		  --layers=`pcbnew --list-layers $(BRD) | tr '\012' ,` \
+		  --plot-fill-all-zones --plot-exclude-edge \
 		  $(BRD)
 		mv $(NAME)-PCB_Edges.gbr $(NAME)-PCB_Edges.oln
 		cp $(GERBERS:%=$(NAME)-%) $(GERBDIR)
@@ -107,7 +107,7 @@ $(GERBERS:%=$(GERBDIR)/$(NAME)-%): $(NAME).brd Makefile
 fab:		fab-pcb
 
 $(GERBDIR)/$(NAME).drl:	$(NAME).brd
-		pcbnew --drill --origin=aux $(BRD)
+		pcbnew --drill --drill-aux-origin $(BRD)
 		mv $(NAME).drl $(GERBDIR)/$(NAME).drl
 
 fab-pcb:	$(PCB_FILES)
