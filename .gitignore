@@ -18,3 +18,5 @@ fab
 *.gbo
 *.gbp
 gerbers
+*.pho
+*.rpt
