@@ -1,4 +1,4 @@
-update=Wed 02 May 2012 08:14:10 PM EDT
+update=Tue 08 May 2012 10:38:13 PM EDT
 version=1
 last_client=pcbnew
 [cvpcb]
@@ -58,7 +58,7 @@ LibName35=valves
 [pcbnew]
 version=1
 LastNetListRead=
-PadDrlX=320
+PadDrlX=400
 PadDimH=600
 PadDimV=600
 BoardThickness=630
@@ -68,7 +68,7 @@ TxtModV=600
 TxtModH=600
 TxtModW=120
 VEgarde=100
-DrawLar=150
+DrawLar=50
 EdgeLar=150
 TxtLar=120
 MSegLar=150
@@ -103,3 +103,4 @@ LibName26=TESTPAD
 LibName27=TESTVIA
 LibName28=VQFN
 LibName29=XTAL_4
+LibName30=FIDUCIAL

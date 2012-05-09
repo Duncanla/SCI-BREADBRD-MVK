@@ -88,9 +88,12 @@ fab/%-Back.ps:	%.brd
 GERBDIR = gerbers
 GERBERS = SilkS_Front.gto Mask_Front.gts \
 	  Front.gtl Back.gbl Mask_Back.gbs \
-	  PCB_Edges.oln SoldP_Front.gtp
+	  PCB_Edges.oln SoldP_Front.gtp \
+	  SilkS_Back.gbo Inner2.g2 Inner3.g3 \
+	  SoldP_Back.gbp
 
-PCB_FILES = $(GERBDIR)/$(NAME).drl $(GERBERS:%=$(GERBDIR)/$(NAME)-%)
+PCB_FILES = $(GERBDIR)/$(NAME).drl \
+			$(GERBERS:%=$(GERBDIR)/$(NAME)-%)
 
 gerber:		$(GERBERS:%=$(GERBDIR)/$(NAME)-%)
 
@@ -101,6 +104,8 @@ $(GERBERS:%=$(GERBDIR)/$(NAME)-%): $(NAME).brd Makefile
 		  --plot-fill-all-zones --plot-exclude-edge \
 		  $(BRD)
 		mv $(NAME)-PCB_Edges.gbr $(NAME)-PCB_Edges.oln
+		mv $(NAME)-Inner2.gbr $(NAME)-Inner2.g2
+		mv $(NAME)-Inner3.gbr $(NAME)-Inner3.g3
 		cp $(GERBERS:%=$(NAME)-%) $(GERBDIR)
 		rm $(GERBERS:%=$(NAME)-%)
 
@@ -114,7 +119,7 @@ fab-pcb:	$(PCB_FILES)
 		mkdir -p fab
 		tar Ccfz .. fab/$(NAME)-pcb-$(VERSION).tar.gz \
 		  $(PCB_FILES:%=$(DIR)/%)
-		cd ..; zip -l $(DIR)/fab/$(NAME)-pcb-$(VERSION).zip \
+		cd ..; zip -j -l $(DIR)/fab/$(NAME)-pcb-$(VERSION).zip \
 		  $(PCB_FILES:%=$(DIR)/%)
 
 gerbv:
@@ -169,11 +174,13 @@ overview:	$(NAME)-overview.png
 clean::
 		rm -f $(GERBERS:%=$(GERBDIR)/$(NAME)-%)
 		rm -f $(GERBDIR)/$(NAME).drl
+		rm -f $(GERBDIR)/$(NAME)-NPTH.drl
 		rm -f $(GERBDIR)/$(NAME)-overview.png $(GERBDIR)/$(NAME)-front.png
 		rm -f $(GERBDIR)/$(NAME)-back.png
 		rm -f $(NAME)Front.pos $(NAME)-pos.csv
 		rm -f $(BOM_DIR)/$(NAME)-bom.csv $(NAME)-footprints.pdf
 		rm -f $(BOM_DIR)/$(NAME)-dkbom.csv
+		rm -f fab/*
 
 spotless::	clean
 		rm -f '$$'savepcb.000 '$$'savepcb.brd
